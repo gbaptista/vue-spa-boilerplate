@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>VueJS SPA</title>
+    <script src="assets/vendor/modernizr-webp-3.6.0.js") %>" ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/stylesheets/app.css?v={VERSION}">
+  </head>
+  <body>
+
+    <div id="app">
+      <home-page v-if="currentPage == 'home'"></home-page>
+      <settings-page v-if="currentPage == 'settings'"></settings-page>
+    </div>
+
+    <script src="assets/javascripts/app.js?v={VERSION}"></script>
+  </body>
+</html>
