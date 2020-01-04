@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -o errexit
-
 command=$1
 context=$2
 environment=$3
@@ -60,6 +58,13 @@ if [[ $command == "compile" ]]; then
 
   fi
 
+  if [[ $context == "images" ]] || [[ $context == "all" ]]; then
+
+    rm -rf public/assets/images
+    cp -r images public/assets
+
+  fi
+
   if test -f "public/index.html"; then
     sed -i "s/v=.*\"/v=$(date +%s)\"/g" public/index.html
   fi
@@ -87,6 +92,17 @@ if [[ $command == "watch" ]]; then
       printf "\n"; ./build.sh watch $context $environment
     elif [[ $filename == *".html"* ]]; then
       ./build.sh compile "html" $environment
+      printf "\n"; ./build.sh watch $context $environment
+    elif [[ $filename == *".gif"* ]]; then
+      ./build.sh compile "images" $environment
+      printf "\n"; ./build.sh watch $context $environment
+    elif [[ $filename == *".png"* ]]; then
+      ./build.sh compile "images" $environment
+      printf "\n"; ./build.sh watch $context $environment
+    elif [[ $filename == *".jpg"* ]]; then
+      ./build.sh compile "images" $environment
+      printf "\n"; ./build.sh watch $context $environment
+    else
       printf "\n"; ./build.sh watch $context $environment
     fi
   done
